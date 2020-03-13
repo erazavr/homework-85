@@ -24,7 +24,8 @@ class Tracks extends Component {
                             <Card key={item._id} className='mb-5'>
                                 <CardBody>
                                     <CardTitle><b>Название трека:</b> {item.name}</CardTitle>
-                                    <CardSubtitle><b>Номер:</b> {item.number}</CardSubtitle>
+                                    <CardSubtitle className='mb-3'><b>Номер:</b> {item.number}</CardSubtitle>
+                                    <CardSubtitle><b>Продолжительность:</b> {item.duration}</CardSubtitle>
                                 </CardBody>
                             </Card>
                         ))}
