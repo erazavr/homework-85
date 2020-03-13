@@ -20,7 +20,7 @@ class Artists extends Component {
                             {artists[item].image ? <CardImg style={{width: '100px'}} className='ml-2 mt-2' src={`http://localhost:8000/uploads/${artists[item].image}`} alt="Card image cap" /> : null}
                             <CardBody>
                                 <CardTitle><b>Имя исполнителя:</b> {artists[item].name}</CardTitle>
-                                <CardText><b>ИнформацияZ:</b> {artists[item].info}</CardText>
+                                <CardText><b>Информация:</b> {artists[item].info}</CardText>
                                 <NavLink to={`/albums/${artists[item]._id}`}>Посмотреть альбомы >></NavLink>
                             </CardBody>
                         </Card>
