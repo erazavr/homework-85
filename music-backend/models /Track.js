@@ -12,7 +12,8 @@ const TrackSchema = new mongoose.Schema(
             required: true,
         },
         duration: Number,
-        number: Number
+        number: Number,
+        video: String,
     },
     {versionKey: false}
  );
