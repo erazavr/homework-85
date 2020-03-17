@@ -15,7 +15,7 @@ class Albums extends Component {
             <Container>
                 {this.props.albums[0] ?
                 <div>
-                    <h1 className='mb-5'>Имя испольнителя : <span className='font-weight-light'>{this.props.albums[0].artist.name}</span></h1>
+                    <h1 className='mb-5'>Имя исполнителя : <span className='font-weight-light'>{this.props.albums[0].artist.name}</span></h1>
                     {this.props.albums.map(item => (
                         <Card key={item._id} className='mb-5'>
                             {item.image ? <CardImg style={{width: '100px'}} className='ml-2 mt-2 border' src={`http://localhost:8000/uploads/${item.image}`} alt="Card image cap" /> : null}
