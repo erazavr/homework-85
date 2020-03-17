@@ -52,73 +52,85 @@ const run = async () => {
             name: "Разреши мне",
             album: tcoi_unknown._id,
             duration: 4,
-            number: 1
+            number: 1,
+            video: "https://www.youtube.com/embed/VUjKe8IMLPo",
         },
         {
             name: "Братская любовь",
             album: tcoi_unknown._id,
             duration: 3,
-            number: 2
+            number: 2,
+            video: "https://www.youtube.com/embed/SObZv9-lBvU"
         },
         {
             name: "Ты мог бы...",
             album: tcoi_unknown._id,
             duration: 3,
-            number: 3
+            number: 3,
+            video: "https://www.youtube.com/embed/lOHziwXj5hw"
         },
         {
             name: "Восьмиклассница",
             album: tcoi_concert._id,
             duration: 2,
-            number: 1
+            number: 1,
+            video: "https://www.youtube.com/embed/w5jU_lVQt4o"
         },
         {
             name: "Последний герой",
             album: tcoi_concert._id,
             duration: 4,
-            number: 2
+            number: 2,
+            video: "https://www.youtube.com/embed/BnDY4jC7JZM"
         },
         {
             name: "Хочу перемен",
             album: tcoi_concert._id,
             duration: 4,
-            number: 3
+            number: 3,
+            video: "https://www.youtube.com/embed/FU8csnZxdPA"
         },
         {
             name: "Let's Turn It On",
             album: freddie_badGuy._id,
             duration: 3,
-            number: 1
+            number: 1,
+            video: "https://www.youtube.com/embed/-u9H_i6yjEo"
         },
         {
             name: "Made in Heaven",
             album: freddie_badGuy._id,
             duration: 4,
-            number: 2
+            number: 2,
+            video: "https://www.youtube.com/embed/171skzi5BKc"
         },
         {
             name: "I Was Born to Love You",
             album: freddie_badGuy._id,
             duration: 3,
-            number: 3
+            number: 3,
+            video: "https://www.youtube.com/embed/Fna56a_r41s"
         },
         {
             name: "One Vision",
             album: freddie_live._id,
             duration: 5,
-            number: 1
+            number: 1,
+            video: "https://www.youtube.com/embed/-OGd4gplxQM"
         },
         {
             name: "Tie Your Mother Down",
             album: freddie_live._id,
             duration: 3,
-            number: 2
+            number: 2,
+            video: "https://www.youtube.com/embed/LvB2MnIIdMw"
         },
         {
             name: "In the Lap of the Gods",
             album: freddie_live._id,
             duration: 2,
-            number: 3
+            number: 3,
+            video: "https://www.youtube.com/embed/ieXcPZC0MJk"
         },
     )
 };
