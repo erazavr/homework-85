@@ -10,14 +10,22 @@ const HistorySchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        datetime: {
-            type: Date,
-            default: Date.now
+        trackName: {
+            type: String,
+            required: true
         },
+        artist: {
+          type: String,
+          required: true
+        },
+        datetime: String,
 
     },
     { versionKey: false }
 );
+HistorySchema.methods.date = function () {
+    this.datetime = new Date().toLocaleString()
+};
 
 const History = mongoose.model('History', HistorySchema);
 
