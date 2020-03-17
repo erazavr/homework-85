@@ -7,7 +7,6 @@ const router = express.Router();
 
 router.post ('/', async (req, res) => {
     const user = new User(req.body);
-    
     try {
         user.generateToken();
         await user.save();
@@ -27,7 +26,7 @@ router.post('/sessions', async (req, res) => {
     }
     user.generateToken();
     await user.save();
-    res.send({token: user.token})
+    res.send(user)
 });
 
 module.exports = router;
