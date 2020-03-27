@@ -6,7 +6,10 @@ const User = require('../models /User');
 const router = express.Router();
 
 router.post ('/', async (req, res) => {
-    const user = new User(req.body);
+    const user = new User({
+        username: req.body.username,
+        password: req.body.password
+    });
     try {
         user.generateToken();
         await user.save();
@@ -27,6 +30,23 @@ router.post('/sessions', async (req, res) => {
     user.generateToken();
     await user.save();
     res.send(user)
+});
+
+router.delete('/sessions', async (req, res) => {
+    const success = {message: "Success"};
+    try {
+        const token = req.get('Authorization').split(' ')[1];
+        if (!token) return res.send(success);
+        const user = await User.findOne({token});
+        if (!user) return res.send(success);
+
+        user.generateToken();
+        await user.save();
+        res.send(success);
+    } catch (error) {
+        return res.send(success)
+    }
+
 });
 
 module.exports = router;
