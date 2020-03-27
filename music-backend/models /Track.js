@@ -11,11 +11,24 @@ const TrackSchema = new mongoose.Schema(
             ref: 'Album',
             required: true,
         },
+        user: {
+            type: mongoose.Schema.Types.ObjectID,
+            ref: 'User',
+            required: true
+        },
         duration: Number,
         number: Number,
         video: String,
+        published: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+
     },
-    {versionKey: false}
+    {versionKey: false},
+
+
  );
 
 const Track = mongoose.model('Track', TrackSchema);

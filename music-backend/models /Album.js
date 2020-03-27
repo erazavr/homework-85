@@ -11,14 +11,24 @@ const AlbumSchema = new mongoose.Schema(
            ref: 'Artist',
            required: true
        },
-       year: {
+        user: {
+            type: mongoose.Schema.Types.ObjectID,
+            ref: 'User',
+            required: true
+        },
+        year: {
            type: String,
            required: true
        },
        image: {
            type: String,
            required: true
-       }
+       },
+        published: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
     },
     {versionKey: false}
 );
