@@ -1,6 +1,6 @@
 import {
     FETCH_HISTORY_SUCCESS,
-    LOGIN_USER_FAILURE, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS,
+    LOGIN_USER_FAILURE, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGOUT_USER_SUCCESS,
     REGISTER_USER_FAILURE,
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS
@@ -30,6 +30,8 @@ const usersReducer = (state = initialState, action) => {
             return {...state, loginLoading: false, loginError: action.error};
         case FETCH_HISTORY_SUCCESS:
             return {...state, history: action.history};
+        case LOGOUT_USER_SUCCESS:
+            return {...state, user: null}
         default:
             return state
     }
