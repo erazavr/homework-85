@@ -8,6 +8,10 @@ import Toolbar from "./components /UI/Toolbar/Toolbar";
 import Register from "./containers /Register/Register";
 import Login from "./containers /Login/Login";
 import TrackHistory from "./containers /History /TrackHistory";
+import AddArtist from "./containers /AddArtist/AddArtist";
+import AddAlbum from "./containers /AddAlbum/AddAlbum";
+import AddTrack from "./containers /AddTrack/AddTrack";
+import AdminOffice from "./containers /AdminOffice/AdminOffice";
 
 const App = () => {
     return (
@@ -23,6 +27,10 @@ const App = () => {
                     <Route path='/register' exact component={Register}/>
                     <Route path='/login' exact component={Login}/>
                     <Route path='/history' exact component={TrackHistory}/>
+                    <Route path='/addArtist' exact component={AddArtist}/>
+                    <Route path='/addAlbum' exact component={AddAlbum}/>
+                    <Route path='/addTrack' exact component={AddTrack}/>
+                    <Route path='/admin_office' exact component={AdminOffice}/>
                     <Route render={()=> <h1>Not Found</h1>}/>
                 </Switch>
             </Container>
