@@ -4,6 +4,7 @@ import {getArtistAlbum} from "../../store /actions /albumsActions";
 import {connect} from "react-redux";
 import {newTrack} from "../../store /actions /tracksActions";
 import {getArtists} from "../../store /actions /artistsActions";
+import {Redirect} from "react-router-dom";
 
 class AddTrack extends Component {
     state = {
@@ -47,63 +48,66 @@ class AddTrack extends Component {
     render() {
         return (
             <>
-                <Form onSubmit={this.submitFormHandler}>
-                    <FormGroup>
-                        <Label for="name">Название композиции</Label>
-                        <Input type="text" name="name" id="name" placeholder="Название композции" value={this.state.name} onChange={this.inputChangeHandler}/>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="duration">Длительность</Label>
-                        <Input type="number" name="duration" id="duration" placeholder="Длительность композии" value={this.state.duration} onChange={this.inputChangeHandler}/>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="number">Номер композии</Label>
-                        <Input type="number" name="number" id="number" placeholder="Номер" onChange={this.inputChangeHandler}/>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="video">Ссылка на видео</Label>
-                        <Input type="text" name="video" id="video" placeholder="Ссылка на видео" onChange={this.inputChangeHandler}/>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="artist">Автор альбома</Label>
-                        <Input
-                            type="select"
-                            name="artist" id="artist"
-                            value={this.state.artist}
-                            onChange={this.inputChangeHandler}
-
-                        >
-                            <option value="">Please select a category...</option>
-                            {this.props.artists && Object.keys(this.props.artists).map(artist => (
-                                <option key={this.props.artists[artist]._id} value={this.props.artists[artist]._id}>{this.props.artists[artist].name}</option>
-                            ))}
-                        </Input>
-                    </FormGroup>
-                    {
-                        this.state.artist &&
+                {this.props.user ?
+                    <Form onSubmit={this.submitFormHandler}>
                         <FormGroup>
-                            <Label for="album">Альбом данного исполнителя</Label>
+                            <Label for="name">Название композиции</Label>
+                            <Input type="text" name="name" id="name" placeholder="Название композции" value={this.state.name} onChange={this.inputChangeHandler}/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="duration">Длительность</Label>
+                            <Input type="number" name="duration" id="duration" placeholder="Длительность композии" value={this.state.duration} onChange={this.inputChangeHandler}/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="number">Номер композии</Label>
+                            <Input type="number" name="number" id="number" placeholder="Номер" onChange={this.inputChangeHandler}/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="video">Ссылка на видео</Label>
+                            <Input type="text" name="video" id="video" placeholder="Ссылка на видео" onChange={this.inputChangeHandler}/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="artist">Автор альбома</Label>
                             <Input
                                 type="select"
-                                name="album" id="album"
-                                value={this.state.album}
+                                name="artist" id="artist"
+                                value={this.state.artist}
                                 onChange={this.inputChangeHandler}
 
                             >
                                 <option value="">Please select a category...</option>
-                                {this.props.albums && Object.keys(this.props.albums).map(album => (
-                                    <option key={this.props.albums[album]._id} value={this.props.albums[album]._id}>{this.props.albums[album].name}</option>
+                                {this.props.artists && Object.keys(this.props.artists).map(artist => (
+                                    <option key={this.props.artists[artist]._id} value={this.props.artists[artist]._id}>{this.props.artists[artist].name}</option>
                                 ))}
                             </Input>
                         </FormGroup>
-                    }
-                    <Button type='submit'>Submit</Button>
-                </Form>
+                        {
+                            this.state.artist &&
+                            <FormGroup>
+                                <Label for="album">Альбом данного исполнителя</Label>
+                                <Input
+                                    type="select"
+                                    name="album" id="album"
+                                    value={this.state.album}
+                                    onChange={this.inputChangeHandler}
+
+                                >
+                                    <option value="">Please select a category...</option>
+                                    {this.props.albums && Object.keys(this.props.albums).map(album => (
+                                        <option key={this.props.albums[album]._id} value={this.props.albums[album]._id}>{this.props.albums[album].name}</option>
+                                    ))}
+                                </Input>
+                            </FormGroup>
+                        }
+                        <Button type='submit'>Submit</Button>
+                    </Form>: <Redirect from='addTrack' to='login'/>
+                }
             </>
         );
     }
 }
 const mapStateToProps = state => ({
+   user: state.users.user,
    albums: state.albums.albums,
    artists: state.artists.artists
 });
