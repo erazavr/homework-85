@@ -44,7 +44,8 @@ class Artists extends Component {
     }
 }
 const mapStateToProps = state => ({
-    artists: state.artists.artists
+    artists: state.artists.artists,
+    user: state.users.user
 });
 const mapDispatchToProps = dispatch => ({
     getArtists: () => dispatch(getArtists())
