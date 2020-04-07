@@ -1,15 +1,32 @@
-const express = require('express');
-const bcrypt = require("bcrypt");
+const path = require('path');
 
+const express = require('express');
+const axios = require('axios');
+const bcrypt = require("bcrypt");
+const multer = require('multer');
+
+const config = require('../config');
 const User = require('../models /User');
+const nanoid = require("nanoid");
 
 const router = express.Router();
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, config.uploadPath);
+    },
+    filename: (req, file, cb) => {
+        cb(null, nanoid() + path.extname(file.originalname));
+    }
+});
 
-router.post ('/', async (req, res) => {
-    const user = new User({
-        username: req.body.username,
-        password: req.body.password
-    });
+const upload = multer({storage});
+
+router.post ('/',upload.single('image'), async (req, res) => {
+    const userData = req.body;
+    if (req.file) {
+        userData.avatar = req.file.filename;
+    }
+    const user = new User(userData);
     try {
         user.generateToken();
         await user.save();
@@ -46,6 +63,50 @@ router.delete('/sessions', async (req, res) => {
     } catch (error) {
         return res.send(success)
     }
+
+});
+
+router.post('/facebook', async (req, res) => {
+
+    try {
+        const inputToken = req.body.accessToken;
+        const accessToken = config.facebook.appId + '|' + config.facebook.appSecret;
+
+        const url = `https://graph.facebook.com/debug_token?input_token=${inputToken}&access_token=${accessToken}`;
+
+        const response = await axios.get(url);
+
+        console.log(req.body.picture.data.url);
+
+        if (response.data.data.error) {
+            return res.status(401).send({message: 'Facebook token incorrect'})
+        }
+        if (req.body.id !== response.data.data.user_id) {
+            return res.status(401).send({message: 'User ID incorrect'})
+        }
+
+        let user = await User.findOne({facebookId: req.body.id});
+        if (!user) {
+            const [firstName, lastName] = req.body.name.split(' ');
+            user = new User({
+                username: req.body.id,
+                password: nanoid(),
+                facebookId: req.body.id,
+                avatar: req.body.picture.data.url,
+                firstName,
+                lastName,
+
+            })
+        }
+        user.generateToken();
+        await user.save();
+
+        return res.send(user)
+    } catch (e) {
+        return res.sendStatus(401)
+    }
+
+
 
 });
 
