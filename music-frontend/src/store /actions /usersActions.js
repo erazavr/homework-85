@@ -1,5 +1,6 @@
 import axiosApi from "../../axiosApi";
 import {push} from "connected-react-router";
+import { toast } from 'react-toastify';
 
 export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
@@ -49,6 +50,7 @@ export const loginUser = userData => {
             dispatch(loginUserRequest());
             const response = await axiosApi.post('/users/sessions', userData);
             dispatch(loginUserSuccess(response.data));
+            toast.success('Logged in');
             dispatch(push('/'))
         } catch (error) {
             if (error.response) {
@@ -59,6 +61,17 @@ export const loginUser = userData => {
         }   
     }
 };
+
+export const loginWithFacebook = facebookData => {
+    return async dispatch => {
+        const response = await axiosApi.post('/users/facebook', facebookData);
+        dispatch(loginUserSuccess(response.data));
+        toast.success('Logged in with Facebook');
+        dispatch(push('/'))
+
+    }
+};
+
 export const getHistory = () => {
     return async (dispatch, getState) => {
         try {
@@ -91,6 +104,7 @@ export const logoutUser = () => {
         await axiosApi.delete('/users/sessions', {headers});
 
         dispatch(logoutUserSuccess());
+        toast.success('Logged out');
         dispatch(push('/'))
     }
 };
