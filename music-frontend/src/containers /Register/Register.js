@@ -7,11 +7,20 @@ import FormElement from "../../components /FormElement/FormElement";
 class Register extends Component {
     state = {
         username: '',
-        password: ''
+        password: '',
+        avatar: '',
     };
     submitFormHandler = event => {
         event.preventDefault();
-        this.props.registerUser({...this.state});
+        event.preventDefault();
+
+        const formData = new FormData();
+
+        Object.keys(this.state).forEach(key => {
+            formData.append(key, this.state[key]);
+        });
+
+        this.props.registerUser(formData);
     };
     inputChangeHandler = event => {
         this.setState({
@@ -24,6 +33,11 @@ class Register extends Component {
       } catch (error) {
         return undefined
       }
+    };
+    fileChangeHandler = event => {
+        this.setState({
+            [event.target.name]: event.target.files[0]
+        })
     };
     render() {
         return (
@@ -52,6 +66,15 @@ class Register extends Component {
                             autoComplete='new-password'
                             required={true}
                             type='password'
+                        />
+                        <FormElement
+                            propertyName='image'
+                            title='Ваше изображение'
+                            onChange={this.fileChangeHandler}
+                            error={this.getFieldError('avatar')}
+                            placeholder='Изображение'
+                            required={true}
+                            type='file'
                         />
                     <FormGroup row>
                         <Col sm={{offset: 2, size: 10}}>
