@@ -1,6 +1,18 @@
 import React from 'react';
-import {DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink, UncontrolledDropdown} from "reactstrap";
+import {
+    Card,
+    CardBody,
+    CardImg,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
+    Nav,
+    NavItem,
+    NavLink,
+    UncontrolledDropdown
+} from "reactstrap";
 import {NavLink as RouterNavLink} from "react-router-dom";
+import ImageThumbnail from "../../ImageThumbnail/ImageThumbnail";
 const UserMenu = ({user, logout}) => {
     return (
         <UncontrolledDropdown nav inNavbar>
@@ -22,7 +34,13 @@ const UserMenu = ({user, logout}) => {
                 </NavItem>): null}
             </Nav>
             <DropdownToggle nav caret>
-                Hello, {user.username}!
+                Hello, {user.firstName || user.username}!
+                {
+                  <ImageThumbnail image={user.avatar} facebookId={user.facebookId}/>
+                    // user.avatar ? <CardImg style={{width: '100px'}} className='ml-2 mt-2' src={`http://localhost:8000/uploads/${user.avatar}`} alt="Card image cap" />: null
+                }
+
+
             </DropdownToggle>
             <DropdownMenu right>
                 <DropdownItem>
