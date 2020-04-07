@@ -12,10 +12,12 @@ import AddArtist from "./containers /AddArtist/AddArtist";
 import AddAlbum from "./containers /AddAlbum/AddAlbum";
 import AddTrack from "./containers /AddTrack/AddTrack";
 import AdminOffice from "./containers /AdminOffice/AdminOffice";
+import {ToastContainer} from "react-toastify";
 
 const App = () => {
     return (
         <>
+            <ToastContainer autoClose={2000}/>
             <header>
                 <Toolbar/>
             </header>
