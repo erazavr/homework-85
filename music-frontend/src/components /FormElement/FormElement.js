@@ -27,7 +27,7 @@ FormElement.propTypes = {
     title: PropTypes.string.isRequired,
     required: PropTypes.bool,
     placeholder: PropTypes.string,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     error: PropTypes.string,
     autoComplete: PropTypes.string,
