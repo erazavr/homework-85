@@ -18,7 +18,8 @@ const run = async () => {
         username: "user1",
         password: "123",
         token: nanoid(),
-        role: 'user'
+        role: 'user',
+        avatar: "Victor .jpg"
     }, {
         username: "admin",
         password: "123",
