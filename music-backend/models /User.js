@@ -32,6 +32,10 @@ const UserSchema = new mongoose.Schema(
             default: 'user',
             enum: ['admin', 'user']
         },
+        avatar: String,
+        firstName: String,
+        lastName: String,
+        facebookId: String
     },
     { versionKey: false }
 );
